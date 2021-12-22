@@ -75,3 +75,9 @@ body {
     background-color: rgb(89, 68, 221);
     grid-area: 4/1/5/2;
 }
+
+.loc-name {
+    margin-inline-end: 10px;
+    display: inline;
+    font-size: 1.2em;
+}

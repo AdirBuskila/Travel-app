@@ -26,6 +26,7 @@ function getLocs() {
 function getLocationsForDisplay() {
     const locsFromStorage = storage.load(LOCATIONS_KEY);
     if (!locsFromStorage) {
+        storage.save(LOCATIONS_KEY, locs)
         return locs;
     } else return locsFromStorage;
 }
@@ -35,5 +36,6 @@ function removeLocation(locId) {
     const getLocIdx = locs.findIndex((location) => {
         return location.id === locId;
     })
-    locs.splice(getLocIdx, 1)
+    const remove = locs.splice(getLocIdx, 1)
+    storage.save(LOCATIONS_KEY, locs)
 }

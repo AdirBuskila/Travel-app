@@ -57,9 +57,9 @@ function onGetUserPos() {
         })
 }
 
-function onPanTo() {
+function onPanTo(lat = 35, lng = 139) {
     console.log('Panning the Map');
-    mapService.panTo(35.6895, 139.6917);
+    mapService.panTo(lat, lng);
 }
 
 function onSearch(ev) {
@@ -71,11 +71,14 @@ function onSearch(ev) {
 function renderLocationList() {
     const locations = locService.getLocationsForDisplay();
     if (!locations) return;
-    console.log('locations:', locations);
-    // console.log(locations);
     const strHtmls = locations.map((location) => {
         console.log(location);
-        return `<li onclick="onRemoveLocation(${location.id})">${location.name}<br /> Location:${location.lat}, ${location.lng}<br /> Created At:${location.createdAt} Updated At:${location.updatedAt}</li>`
+        return `<p class="loc-name"> * ${location.name}</p>
+        <button onclick="onPanTo(${location.lat},${location.lng})">Go To</button>
+        <button onclick="onRemoveLocation(${location.id})">Remove</button>
+        <p>Location: Lat:${location.lat}, Lng: ${location.lng}</p>
+        <p>Created At:${location.createdAt} Updated At:${location.updatedAt}</p>
+        <hr>`
     })
     document.querySelector('.locations-container').innerHTML = strHtmls.join('');
 
@@ -83,5 +86,6 @@ function renderLocationList() {
 
 function onRemoveLocation(locId) {
     locService.removeLocation(locId);
+    renderLocationList()
 
 }
