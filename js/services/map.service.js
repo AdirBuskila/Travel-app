@@ -1,8 +1,10 @@
+import { locService } from "./loc.service.js";
 export const mapService = {
     initMap,
     addMarker,
     panTo
 }
+
 
 var gMap;
 
@@ -16,22 +18,27 @@ function initMap() {
             });
             // Create the initial InfoWindow.
             let infoWindow = new google.maps.InfoWindow({
-                content: "Click the map to get Lat/Lng!",
+                content: "Click the map add location!",
                 position: myLatlng,
             });
-
             infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                // Close the current InfoWindow.
                 infoWindow.close();
-                // Create a new InfoWindow.
+                var locationName = prompt('enter location name') || 'Location'
+                var location = mapsMouseEvent.latLng.toJSON()
+                var selectedLocation = {
+                    id: Math.floor(Math.random() * 1000),
+                    name: locationName,
+                    location,
+                    createdAt: Date.now(),
+                    updatedAt: Date.now(),
+                }
+                locService.updateLocs(selectedLocation);
                 infoWindow = new google.maps.InfoWindow({
+                    content: locationName,
                     position: mapsMouseEvent.latLng,
                 });
-                infoWindow.setContent(
-                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-                );
                 infoWindow.open(gMap);
             });
         });
@@ -49,7 +56,6 @@ function addMarker(loc) {
 
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
-    console.log('laLatLng :>> ', laLatLng);
     gMap.panTo(laLatLng);
 }
 

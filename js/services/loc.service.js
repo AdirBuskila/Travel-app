@@ -3,7 +3,8 @@ import { storage } from "./storage.service.js";
 export const locService = {
     getLocs,
     getLocationsForDisplay,
-    removeLocation
+    removeLocation,
+    updateLocs,
 }
 
 const LOCATIONS_KEY = 'locationsDB'
@@ -20,6 +21,11 @@ function getLocs() {
             resolve(locs);
         }, 2000)
     });
+}
+
+function updateLocs(obj) {
+    locs.push(obj);
+    storage.save(LOCATIONS_KEY, obj)
 }
 
 
