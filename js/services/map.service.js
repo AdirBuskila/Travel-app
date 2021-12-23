@@ -1,8 +1,10 @@
 import { locService } from "./loc.service.js";
+
 export const mapService = {
     initMap,
     addMarker,
-    panTo
+    panTo,
+    getSearchedLoc
 }
 
 
@@ -46,10 +48,11 @@ function initMap() {
 
 
 function addMarker(loc) {
+    console.log(loc, 'loc');
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: 'Hello World!'
+        title: loc.name
     });
     return marker;
 }
@@ -59,7 +62,16 @@ function panTo(lat, lng) {
     gMap.panTo(laLatLng);
 }
 
-
+function getSearchedLoc(searchedLoc) {
+    const searchStr = searchedLoc.replaceAll(' ', '+');
+    return axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchStr}&key=${`AIzaSyAOgxH0MWeJ1fJenyM0hhgvAgEGW23bAoU`}`)
+        .then(ans => {
+            const name = ans.data.results[0].formatted_address;
+            const { lat, lng } = ans.data.results[0].geometry.location;
+            panTo(lat, lng);
+            locService.addLoc(name, lat, lng);
+        })
+}
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()

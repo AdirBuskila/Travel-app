@@ -3,6 +3,10 @@
 }
 
 
+/* Font Import */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
+
 /*Helpers*/
 
 .grid {
@@ -13,30 +17,51 @@
     display: flex;
 }
 
+.border-radius {
+    border-radius: 3%;
+}
+
+.box-shadow {
+    box-shadow: 5px 5px 5px 4px rgba(0, 0, 0, 0.21);
+}
+
 
 /* Main */
 
 body {
     margin: 0;
-    background: rgb(233, 233, 233);
+    background: rgb(187, 187, 187);
+    font-family: monospace;
+    font-weight: 400;
+    font-size: 1rem;
+    width: 100vw;
+    height: 100vh;
 }
 
 .main-container {
-    background-color: rgb(243, 147, 83);
+    background-color: rgb(65, 68, 236);
     margin: auto;
     width: 95vw;
     margin-top: 30px;
     padding-bottom: 50px;
-    border-radius: 3%;
     justify-content: center;
     grid-template-columns: repeat(2, minmax(450px, 450px));
     grid-template-rows: 1fr, 2fr, 3fr, 3fr;
-    gap: 10px;
+    gap: 20px;
     box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.62);
+}
+
+.header,
+.searchLoc-container {
+    margin-top: 30px;
 }
 
 .header {
     grid-area: 1/1/1/2;
+}
+
+h1 {
+    font-family: Montserrat;
 }
 
 .searchLoc-container {
@@ -50,7 +75,7 @@ body {
     height: 50px;
 }
 
-.form-input button {
+.form-input .btn-style-1 {
     height: 50px;
 }
 
@@ -72,7 +97,7 @@ body {
 }
 
 .locations-container {
-    background-color: rgb(89, 68, 221);
+    background-color: rgba(221, 40, 238, 0.89);
     grid-area: 4/1/5/2;
 }
 
@@ -80,4 +105,109 @@ body {
     margin-inline-end: 10px;
     display: inline;
     font-size: 1.2em;
+}
+
+.btn-style-2 {
+    background-color: #fafafa;
+    border: 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    transition: .3s box-shadow;
+}
+
+.btn-style-2:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+
+/*  */
+
+.btn-style-1 {
+    background: rgba(221, 40, 238, 0.89);
+    line-height: 42px;
+    padding: 0;
+    border: none;
+}
+
+.btn-style-1 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-style-1:before,
+.btn-style-1:after {
+    position: absolute;
+    content: "";
+    height: 0%;
+    width: 2px;
+    background: #000;
+}
+
+.btn-style-1:before {
+    right: 0;
+    top: 0;
+    transition: all 500ms ease;
+}
+
+.btn-style-1:after {
+    left: 0;
+    bottom: 0;
+    transition: all 500ms ease;
+}
+
+.btn-style-1:hover {
+    color: #000;
+    background: transparent;
+}
+
+.btn-style-1:hover:before {
+    transition: all 500ms ease;
+    height: 100%;
+}
+
+.btn-style-1:hover:after {
+    transition: all 500ms ease;
+    height: 100%;
+}
+
+.btn-style-1 span:before,
+.btn-style-1 span:after {
+    position: absolute;
+    content: "";
+    background: #000;
+}
+
+.btn-style-1 span:before {
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 2px;
+    transition: all 500ms ease;
+}
+
+.btn-style-1 span:after {
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    transition: all 500ms ease;
+}
+
+.btn-style-1 span:hover:before {
+    width: 100%;
+}
+
+.btn-style-1 span:hover:after {
+    width: 100%;
+}
+
+button {
+    font-family: monospace;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+button:hover {
+    cursor: pointer;
 }

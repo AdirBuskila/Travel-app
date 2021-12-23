@@ -22,6 +22,7 @@ function onInit() {
         })
         .catch(() => console.log('Error: cannot init map'));
     renderLocationList();
+    locService.getLocationWeather();
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -63,16 +64,22 @@ function onPanTo(lat = 35, lng = 139) {
 }
 
 function onSearch(ev) {
-    if (ev) ev.preventDefault();
-    const elInputSearch = document.querySelector('input[name=search]');
-    console.log(elInputSearch);
+    ev.preventDefault();
+    const elInputSearch = document.querySelector('input[type="search"]');
+    mapService.getSearchedLoc(elInputSearch.value)
+        .then(() => {
+            renderLocs()
+            elInputSearch.value = '';
+        })
 }
 
 function renderLocationList() {
     const locations = locService.getLocationsForDisplay();
+    console.log('location1:', locations);
     if (!locations) return;
+    console.log('location2:', locations);
     const strHtmls = locations.map((location) => {
-        console.log(location);
+        console.log('location:', location);
         return `<p class="loc-name"> * ${location.name}</p>
         <button onclick="onPanTo(${location.lat},${location.lng})">Go To</button>
         <button onclick="onRemoveLocation(${location.id})">Remove</button>
