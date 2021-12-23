@@ -7,7 +7,7 @@ export const locService = {
     getLocationsForDisplay,
     removeLocation,
     updateLocs,
-    getLocationWeather
+    // getLocationWeather
 }
 
 const LOCATIONS_KEY = 'locationsDB'
@@ -53,15 +53,12 @@ function getLocationsForDisplay() {
 }
 
 function removeLocation(locId) {
-    console.log(locId);
-    const getLocIdx = locs.findIndex((location) => {
-        return location.id === locId;
-    })
-    const remove = locs.splice(getLocIdx, 1)
-    storageService.save(LOCATIONS_KEY, locs)
+    // console.log(locId);
+    const getLocIdx = locs.findIndex(location => location.id === locId)
+    locs.splice(locIdx, 1);
 }
 
-function getLocationWeather(lng = 34.832384, lat = 32.047104) {
-    const WEATHER_KEY = '677ccbb3d27a12747fb3d8b7e784cab6'
-    axios.get(`api.openweathermap.org/data/2.5/weather?lat={${lat}}&lon={${lng}}&units={metric}&appid={${WEATHER_KEY}}`);
-}
+// function getLocationWeather(lng = 34.832384, lat = 32.047104) {
+//     const WEATHER_KEY = '677ccbb3d27a12747fb3d8b7e784cab6'
+//     axios.get(`api.openweathermap.org/data/2.5/weather?lat={${lat}}&lon={${lng}}&units={metric}&appid={${WEATHER_KEY}}`);
+// }

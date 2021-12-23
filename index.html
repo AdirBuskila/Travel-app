@@ -16,14 +16,17 @@
 
     <div class="main-container grid border-radius">
         <h1 class="header">TravelTip</h1>
+        <p>Location: <span class="locs"></span></p>
         <div class="map border-radius box-shadow" id="map" style="width: 100%; height: 400px;"></div>
+
         <div class="searchLoc-container flex">
             <form class="form-input" onsubmit="app.onSearch(event)">
                 <input class="search-input" type="text" name="search" placeholder="Enter Location...">
-                <button class="btn-style-2"><span>🔍</span></button>
+                <button class="search-btn"><span>🔍</span></button>
             </form>
             <button onclick="onGetUserPos()" class="btn-user-pos btn-style-1 border-radius box-shadow"><span>Get User Position</span></button>
         </div>
+
         <button class="copyLoc-container btn-style-1 border-radius box-shadow"><span>Copy Location</span></button>
         <!-- <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button> -->
         <div class="weather-container border-radius box-shadow">Weather</div>
@@ -32,7 +35,7 @@
         <!-- <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button> -->
 
         <!-- <p>You are at: <span class="user-pos"></span></p> -->
-        <p>Locations: <span class="locs"></span></p>
+
     </div>
 
     <script src="lib/axios.js"></script>
